@@ -18,10 +18,12 @@ int main(int argc, char **argv)
 {
     MPI_File fh;
     char *buf;
-    int comm_rank, comm_size, process_portion;
+    int comm_rank, comm_size;
+    uint64_t process_portion;
     MPI_Request req[2];
     MPI_Status status[2];
-    int count, i, j, skip, total_count;
+    int count, i, j, skip;
+    MPI_Offset total_count;
     int mutation_percent = -1;
     char *input = NULL, *output = NULL;
     FILE *tmp_fp;
@@ -107,7 +109,7 @@ int main(int argc, char **argv)
         }
     }
 
-    MPI_Exscan(&count, &total_count, 1, MPI_INT, MPI_SUM, MPI_COMM_WORLD);
+    MPI_Exscan(&count, &total_count, 1, MPI_OFFSET, MPI_SUM, MPI_COMM_WORLD);
     if (comm_rank == 0)
         total_count = 0;
 
