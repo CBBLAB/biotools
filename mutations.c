@@ -3,6 +3,7 @@
 #include <time.h>
 #include <string.h>
 #include <limits.h>
+#include <stdint.h>
 #include "mpi.h"
 
 #define EXTRA_BYTES (1024 * 16)
